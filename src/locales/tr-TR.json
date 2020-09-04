@@ -1,0 +1,17 @@
+{
+  "button": {
+    "login": "Giriş Yap",
+    "save": "Kaydet"
+  },
+  "text": {
+    "createNote": "Not Oluştur",
+    "noteName": "Not Adı",
+    "noteNamePlaceholder": "Lütfen not adı giriniz.",
+    "description": "Açıklama"
+  },
+  "nav": {
+    "logOut": "Çıkış Yap",
+    "noteOperation": "Not İşlemleri",
+    "home": "Anasayfa"
+  }
+}
