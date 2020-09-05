@@ -1,17 +1,9 @@
 <template>
-  <nav
-    class="navbar navbar-expand-lg navbar-dark"
-    style="background-color: #563F7A"
-  >
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #563F7A">
     <router-link to="/" tag="a" class="navbar-brand">{{ home }}</router-link>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <router-link
-          active-class="active"
-          to="/create"
-          tag="li"
-          class="nav-item"
-        >
+        <router-link active-class="active" to="/create" tag="li" class="nav-item">
           <a class="nav-link">{{ noteOperation }}</a>
         </router-link>
       </ul>

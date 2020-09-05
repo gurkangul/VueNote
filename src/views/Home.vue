@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <v-row justify="center">
-      <div class="col-12 mb-5 card mt-5 shadow">
+      <div class="col-12 card shadow">
         <div class="card-body">
           <h3>{{ labels.noteList }}</h3>
           <div class="row col-12 text-center">
@@ -12,9 +12,7 @@
                   ? noteTypeStyle.active
                   : noteTypeStyle.inactive
               "
-            >
-              Kişisel Notlarım
-            </div>
+            >Kişisel Notlarım</div>
             <div
               @click="teamClick"
               :class="
@@ -22,9 +20,7 @@
                   ? noteTypeStyle.inactive
                   : noteTypeStyle.active
               "
-            >
-              Team Notlarım
-            </div>
+            >Team Notlarım</div>
           </div>
           <hr />
           <v-expansion-panels popout v-model="panel" multiple>
@@ -37,9 +33,7 @@
                       <span v-if="open">{{ note.createAt | dateConvert }}</span>
                       <v-row v-else no-gutters style="width: 100%">
                         <v-col cols="6">Yazar: {{ note.authorEmail }}</v-col>
-                        <v-col cols="6"
-                          >Create date: {{ note.createAt | dateConvert }}</v-col
-                        >
+                        <v-col cols="6">Create date: {{ note.createAt | dateConvert }}</v-col>
                       </v-row>
                     </v-fade-transition>
                   </v-col>
@@ -48,11 +42,7 @@
               <v-expansion-panel-content>
                 <div class="row">
                   <div class="col-12 float-right">
-                    <span
-                      @click="isShare = !isShare"
-                      class="btn btn-secondary float-left"
-                      >paylaş</span
-                    >
+                    <span @click="isShare = !isShare" class="btn btn-secondary float-left">paylaş</span>
                     <input
                       v-if="isShare"
                       v-model="shareInput"
@@ -64,9 +54,7 @@
                       @click="shareButton(note)"
                       v-if="isShare"
                       class="ml-2 btn btn-primary"
-                    >
-                      Kaydet
-                    </button>
+                    >Kaydet</button>
 
                     <span class="btn btn-danger float-right">X</span>
                   </div>
@@ -85,10 +73,10 @@
           <div v-if="getNotes.length < 1" class="alert alert-warning">
             <strong>Henüz Burada Bir Kayıt Bulamadık</strong>
             <br />
-            <small
-              >Kayıt Eklemek için Ürün İşlemleri menüsünden
-              yararlanabilirsiniz</small
-            >
+            <small>
+              Kayıt Eklemek için Ürün İşlemleri menüsünden
+              yararlanabilirsiniz
+            </small>
           </div>
         </div>
       </div>

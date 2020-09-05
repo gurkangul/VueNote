@@ -9,8 +9,13 @@ import '../src/assets/loading.css'
 import vuetify from '@/plugins/vuetify'
 import 'vuetify/dist/vuetify.min.css'
 
+import 'primevue/resources/primevue.min.css'
+import 'primeicons/primeicons.css'
+import ToastService from 'primevue/toastservice'
+
 Vue.config.productionTip = false
 Vue.use(firestorePlugin)
+Vue.use(ToastService)
 
 Vue.filter('dateConvert', function(value) {
   if (!value) return value

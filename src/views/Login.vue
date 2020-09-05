@@ -1,69 +1,67 @@
 <template>
-  <div class="row mt-3">
-    <div class="col-3 offset-4 pt-5 card mt-5 shadow">
-      <div class="card-body">
-        <h3>{{ Title }}</h3>
-        <hr />
-        <form>
-          <div v-if="!isUser" class="form-group">
-            <label for="exampleInputEmail1">Username</label>
-            <input
-              type="text"
-              class="form-control"
-              aria-describedby="emailHelp"
-              placeholder="Enter Username"
-              v-model="user.username"
-            />
-          </div>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input
-              type="email"
-              class="form-control"
-              aria-describedby="emailHelp"
-              placeholder="Enter email"
-              v-model="user.email"
-            />
-            <small class="form-text text-muted"
-              >We'll never share your email with anyone else.</small
-            >
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input
-              type="password"
-              class="form-control"
-              placeholder="Password"
-              v-model="user.password"
-            />
-          </div>
-          <div class="row justify-content-">
-            <button
-              v-if="isUser"
-              type="submit"
-              @click.prevent="loginUser"
-              class="btn btn-primary"
-              :disabled="checkForm"
-            >
-              Giriş Yap
-            </button>
-            <button
-              type="submit"
-              @click.prevent="saveUser"
-              class="btn btn-primary"
-              v-else
-              :disabled="checkForm"
-            >
-              Kayıt Ol
-            </button>
-            <a
-              class="ml-2 mt-2"
-              @click.prevent="changeType"
-              href
-              v-text="isUser ? loginP : signUpP"
-            ></a>
-          </div>
-        </form>
+  <div id="login">
+    <div class="row justify-content-center">
+      <div class="col-3 card shadow">
+        <div class="card-body">
+          <h3>{{ Title }}</h3>
+          <hr />
+          <form>
+            <div v-if="!isUser" class="form-group">
+              <label for="exampleInputEmail1">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                aria-describedby="emailHelp"
+                placeholder="Enter Username"
+                v-model="user.username"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input
+                type="email"
+                class="form-control"
+                aria-describedby="emailHelp"
+                placeholder="Enter email"
+                v-model="user.email"
+              />
+              <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Password"
+                v-model="user.password"
+              />
+            </div>
+            <div class="row justify-content-">
+              <Button
+                v-if="isUser"
+                :disabled="checkForm"
+                @click.prevent="loginUser"
+                label="Giriş Yap"
+                class="ml-3 p-button-sm"
+              />
+
+              <Button
+                v-else
+                :disabled="checkForm"
+                @click.prevent="saveUser"
+                label="Kayıt Ol"
+                class="ml-3 p-button-sm"
+              />
+
+              <a
+                class="ml-2 mt-2"
+                @click.prevent="changeType"
+                href
+                v-text="isUser ? loginP : signUpP"
+              ></a>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -71,6 +69,7 @@
 
 <script>
 // @ is an alias to /src
+import Button from 'primevue/button'
 export default {
   name: 'Login',
   data() {
@@ -117,6 +116,18 @@ export default {
         return true
       }
     }
+  },
+  components: {
+    Button
   }
 }
 </script>
+
+  <style scoped>
+#login {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>

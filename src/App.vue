@@ -7,7 +7,9 @@
       </div>
     </div>
     <app-header></app-header>
-    <router-view></router-view>
+    <div>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -37,4 +39,8 @@ export default {
 }
 </script>
 
-<style></style>
+  <style>
+body {
+  margin: 0;
+}
+</style>
