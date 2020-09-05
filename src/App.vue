@@ -1,5 +1,7 @@
 <template>
   <div>
+    <Toast />
+
     <div class="loading" :style="$store.state.isLoading">
       <div class="lds-ripple">
         <div></div>
@@ -16,6 +18,8 @@
 <script>
 // import { db } from './services/firebase'
 import Header from './components/layouts/Header'
+import Toast from 'primevue/toast'
+
 export default {
   data() {
     return {}
@@ -27,7 +31,8 @@ export default {
     }
   },
   components: {
-    appHeader: Header
+    appHeader: Header,
+    Toast
   },
   created() {
     // var user = JSON.parse(localStorage.getItem('user'))

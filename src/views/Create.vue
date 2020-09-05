@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <Toast />
     <div class="row">
       <div class="col-6 offset-3 pt-3 card mt-5 shadow">
         <div class="card-body">
@@ -32,7 +31,6 @@
 </template>
 <script>
 import { VueEditor } from 'vue2-editor'
-import Toast from 'primevue/toast'
 export default {
   name: 'Create',
   data() {
@@ -84,6 +82,6 @@ export default {
       }
     }
   },
-  components: { VueEditor, Toast }
+  components: { VueEditor }
 }
 </script>

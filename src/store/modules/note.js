@@ -43,6 +43,20 @@ const mutations = {
 }
 
 const actions = {
+  async removeNote({ state, commit, dispatch }, payload) {
+    var updateState = state.noteList.filter(val => val.id != payload.id)
+    console.log(state, payload, updateState)
+
+    commit('GET_NOTES', updateState)
+    dispatch('getUserNotes')
+    dispatch('getUserNotes')
+
+    return await db.app
+      .firestore()
+      .collection('notes')
+      .doc(payload.id)
+      .delete()
+  },
   async saveNote({ commit, state }, payload) {
     console.log(store, store.getters.getCurrentUser.uid)
     var grpId = short.generate()

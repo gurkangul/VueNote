@@ -42,7 +42,9 @@
               <v-expansion-panel-content>
                 <div class="row">
                   <div class="col-12 float-right">
-                    <span @click="isShare = !isShare" class="btn btn-secondary float-left">paylaş</span>
+                    <span @click="isShare = !isShare" class="btn float-left">
+                      <i class="pi pi-share-alt" style="fontSize: 22px"></i>
+                    </span>
                     <input
                       v-if="isShare"
                       v-model="shareInput"
@@ -56,7 +58,9 @@
                       class="ml-2 btn btn-primary"
                     >Kaydet</button>
 
-                    <span class="btn btn-danger float-right">X</span>
+                    <span @click="removeItem(note)" class="btn float-right">
+                      <i class="pi pi-times float-left" style="fontSize: 22px"></i>
+                    </span>
                   </div>
                   <div class="col-12 float-right">
                     <vue-editor
@@ -86,6 +90,7 @@
 
 <script>
 import { VueEditor } from 'vue2-editor'
+
 export default {
   name: 'Home',
   data() {
@@ -110,6 +115,28 @@ export default {
     }
   },
   methods: {
+    removeItem(item) {
+      console.log(item)
+      this.$store
+        .dispatch('removeNote', item)
+        .then(() => {
+          this.$toast.add({
+            severity: 'success',
+            summary: 'Başarılı',
+            detail: 'Kayıt silindi.',
+            life: 3000
+          })
+        })
+        .catch(err => {
+          console.log(err)
+          this.$toast.add({
+            severity: 'error',
+            summary: 'Hata',
+            detail: 'Silme işlemi hatalı.',
+            life: 3000
+          })
+        })
+    },
     shareButton(item) {
       console.log(this.shareInput, item)
       this.$store.dispatch('shareNote', {
@@ -140,6 +167,7 @@ export default {
       return this.$store.getters.getAllNotes
     }
   },
+  watch: {},
   components: { VueEditor }
 }
 </script>
