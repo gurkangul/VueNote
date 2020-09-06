@@ -1,17 +1,43 @@
 {
   "button": {
     "login": "Giriş Yap",
-    "save": "Kaydet"
+    "save": "Kaydet",
+    "signUp": "Kayıt Ol"
   },
   "text": {
     "createNote": "Not Oluştur",
     "noteName": "Not Adı",
     "noteNamePlaceholder": "Lütfen not adı giriniz.",
-    "description": "Açıklama"
+    "description": "Açıklama",
+    "loginParag": "kayıt olmak için tıklayın.",
+    "signUpParag": "zaten üyeliğim var.",
+    "loginTitle": "Üye Girişi",
+    "signUpTitle": "Üye Kayıt",
+    "email": "Email Adres",
+    "emailPlaceholder": "email giriniz",
+    "password": "Şifre",
+    "passwordPlaceholder": "şifre",
+    "username": "Kullanıcı Adı",
+    "usernamePlaceholder": "kullanıcı adı giriniz",
+    "authorLabel": "Yazar",
+    "createDateLabel": "Tarih",
+    "shareNote": "Paylaşılan Notlar",
+    "personalNote": "Kişisel Notlarım",
+    "noteTitle": "Not Listesi"
   },
   "nav": {
     "logOut": "Çıkış Yap",
     "noteOperation": "Not İşlemleri",
     "home": "Anasayfa"
+  },
+  "warn": {
+    "alert1": "Henüz Burada Bir Kayıt Bulamadık",
+    "alert2": "Kayıt Eklemek için Ürün İşlemleri menüsünden yararlanabilirsiniz",
+    "success": "Başarılı",
+    "deleteSuccessDetail": "Kayıt silindi.",
+    "deleteErrorDetail": "Silme işlemi hatalı.",
+    "error": "Hata",
+    "addSuccessDetail": "Kayıt oluşturuldu.",
+    "addErrorDetail": "Hata..."
   }
 }

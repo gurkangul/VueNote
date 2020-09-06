@@ -3,7 +3,7 @@
     <v-row justify="center">
       <div class="col-12 card shadow">
         <div class="card-body">
-          <h3>{{ labels.noteList }}</h3>
+          <h3>{{ noteTitle}}</h3>
           <div class="row col-12 text-center">
             <div
               @click="personalClick"
@@ -12,7 +12,7 @@
                   ? noteTypeStyle.active
                   : noteTypeStyle.inactive
               "
-            >Kişisel Notlarım</div>
+            >{{personalNote}}</div>
             <div
               @click="teamClick"
               :class="
@@ -20,7 +20,7 @@
                   ? noteTypeStyle.inactive
                   : noteTypeStyle.active
               "
-            >Team Notlarım</div>
+            >{{shareNote}}</div>
           </div>
           <hr />
           <v-expansion-panels popout v-model="panel" multiple>
@@ -32,8 +32,8 @@
                     <v-fade-transition leave-absolute>
                       <span v-if="open">{{ note.createAt | dateConvert }}</span>
                       <v-row v-else no-gutters style="width: 100%">
-                        <v-col cols="6">Yazar: {{ note.authorEmail }}</v-col>
-                        <v-col cols="6">Create date: {{ note.createAt | dateConvert }}</v-col>
+                        <v-col cols="6">{{authorLabel}}: {{ note.authorEmail }}</v-col>
+                        <v-col cols="6">{{createDateLabel}}: {{ note.createAt | dateConvert }}</v-col>
                       </v-row>
                     </v-fade-transition>
                   </v-col>
@@ -56,7 +56,7 @@
                       @click="shareButton(note)"
                       v-if="isShare"
                       class="ml-2 btn btn-primary"
-                    >Kaydet</button>
+                    >{{saveButton}}</button>
 
                     <span @click="removeItem(note)" class="btn float-right">
                       <i class="pi pi-times float-left" style="fontSize: 22px"></i>
@@ -75,12 +75,9 @@
             </v-expansion-panel>
           </v-expansion-panels>
           <div v-if="getNotes.length < 1" class="alert alert-warning">
-            <strong>Henüz Burada Bir Kayıt Bulamadık</strong>
+            <strong>{{alert1}}</strong>
             <br />
-            <small>
-              Kayıt Eklemek için Ürün İşlemleri menüsünden
-              yararlanabilirsiniz
-            </small>
+            <small>{{alert2}}</small>
           </div>
         </div>
       </div>
@@ -95,6 +92,14 @@ export default {
   name: 'Home',
   data() {
     return {
+      alert1: this.$t('warn.alert1'),
+      alert2: this.$t('warn.alert2'),
+      noteTitle: this.$t('text.noteTitle'),
+      personalNote: this.$t('text.personalNote'),
+      shareNote: this.$t('text.shareNote'),
+      authorLabel: this.$t('text.authorLabel'),
+      createDateLabel: this.$t('text.createDateLabel'),
+      saveButton: this.$t('button.save'),
       noteTypeStyle: {
         active: 'col-6 btn text-light bg-info',
         inactive: 'col-6 btn bg-light',
@@ -106,9 +111,6 @@ export default {
       customToolbar: [0],
       editorOpt: {
         readOnly: true
-      },
-      labels: {
-        noteList: 'Note Listesi'
       },
       shareInput: '',
       isShare: false
@@ -122,8 +124,8 @@ export default {
         .then(() => {
           this.$toast.add({
             severity: 'success',
-            summary: 'Başarılı',
-            detail: 'Kayıt silindi.',
+            summary: this.$t('warn.success'),
+            detail: this.$t('warn.deleteSuccessDetail'),
             life: 3000
           })
         })
@@ -131,8 +133,8 @@ export default {
           console.log(err)
           this.$toast.add({
             severity: 'error',
-            summary: 'Hata',
-            detail: 'Silme işlemi hatalı.',
+            summary: this.$t('warn.error'),
+            detail: this.$t('warn.deleteErrorDetail'),
             life: 3000
           })
         })

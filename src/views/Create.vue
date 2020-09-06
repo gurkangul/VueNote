@@ -43,7 +43,7 @@ export default {
         noteDescription: this.$t('text.description')
       },
       note: {
-        content: '<h1>Some initial content</h1>',
+        content: '',
         noteName: ''
       },
       customToolbar: [
@@ -65,8 +65,8 @@ export default {
             console.log(res)
             this.$toast.add({
               severity: 'success',
-              summary: 'Başarılı',
-              detail: 'Kayıt oluşturuldu.',
+              summary: this.$t('warn.success'),
+              detail: this.$t('warn.addSuccessDetail'),
               life: 3000
             })
           })
@@ -74,8 +74,8 @@ export default {
             console.log(err)
             this.$toast.add({
               severity: 'error',
-              summary: 'Hata',
-              detail: 'Kayıt başarısız.',
+              summary: this.$t('warn.error'),
+              detail: this.$t('warn.addErrorDetail'),
               life: 3000
             })
           })

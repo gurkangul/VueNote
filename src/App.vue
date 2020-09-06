@@ -38,7 +38,6 @@ export default {
     // var user = JSON.parse(localStorage.getItem('user'))
     this.$store.state.isLoading.display = 'block'
     this.$store.dispatch('initAuth')
-
     this.$store.state.isLoading.display = 'none'
   }
 }

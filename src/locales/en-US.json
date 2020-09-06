@@ -1,17 +1,43 @@
 {
   "button": {
     "login": "Login",
-    "save": "Save"
+    "save": "Save",
+    "signUp": "Kayıt Ol"
   },
   "text": {
     "createNote": "Create Note",
     "noteName": "Note Name",
     "noteNamePlaceholder": "Please enter note name.",
-    "description": "Description"
+    "description": "Description",
+    "loginParag": "click for sign up.",
+    "signUpParag": "I'm already a member",
+    "loginTitle": "Login",
+    "signUpTitle": "Sign Up",
+    "email": "Email Adress",
+    "emailPlaceholder": "Enter email",
+    "password": "Password",
+    "passwordPlaceholder": "password",
+    "username": "Username",
+    "usernamePlaceholder": "Enter Username",
+    "authorLabel": "Author",
+    "createDateLabel": "Create date",
+    "shareNote": "Share Notes",
+    "personalNote": "Personal Notes",
+    "noteTitle": "Note List"
   },
   "nav": {
     "logOut": "Log Out",
     "noteOperation": "Note Operation",
     "home": "Home"
+  },
+  "warn": {
+    "alert1": "We Could Not Find A Record Here Yet",
+    "alert2": "You can use the Product Transactions menu to add a record.",
+    "success": "Success",
+    "deleteSuccessDetail": "Record deleted.",
+    "deleteErrorDetail": "Error",
+    "error": "Error",
+    "addSuccessDetail": "Record created",
+    "addErrorDetail": "Error..."
   }
 }

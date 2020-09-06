@@ -7,33 +7,38 @@
           <hr />
           <form>
             <div v-if="!isUser" class="form-group">
-              <label for="exampleInputEmail1">Username</label>
+              <label for="username">{{usernameLabel}}</label>
               <input
+                id="username"
                 type="text"
                 class="form-control"
                 aria-describedby="emailHelp"
-                placeholder="Enter Username"
+                :placeholder="usernamePlaceholder"
                 v-model="user.username"
+                required
               />
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
+              <label for="email">{{emailLabel}}</label>
               <input
+                id="email"
                 type="email"
                 class="form-control"
                 aria-describedby="emailHelp"
-                placeholder="Enter email"
+                :placeholder="emailPlaceholder"
                 v-model="user.email"
+                required
               />
-              <small class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
+              <label for="password">{{passwordLabel}}</label>
               <input
+                id="password"
                 type="password"
                 class="form-control"
-                placeholder="Password"
+                :placeholder="passwordPlaceholder"
                 v-model="user.password"
+                required
               />
             </div>
             <div class="row justify-content-">
@@ -41,7 +46,7 @@
                 v-if="isUser"
                 :disabled="checkForm"
                 @click.prevent="loginUser"
-                label="Giriş Yap"
+                :label="loginButton"
                 class="ml-3 p-button-sm"
               />
 
@@ -49,7 +54,7 @@
                 v-else
                 :disabled="checkForm"
                 @click.prevent="saveUser"
-                label="Kayıt Ol"
+                :label="signUpButton"
                 class="ml-3 p-button-sm"
               />
 
@@ -74,14 +79,22 @@ export default {
   name: 'Login',
   data() {
     return {
-      titleSignUp: 'Üye Kayıt',
-      titleLogin: 'Üye Girişi',
-      loginP: 'kayıt olmak için tıklayınız.',
-      signUpP: 'Zaten üyeliğim var.',
+      titleSignUp: this.$t('text.signUpTitle'),
+      titleLogin: this.$t('text.loginTitle'),
+      usernameLabel: this.$t('text.username'),
+      emailLabel: this.$t('text.email'),
+      passwordLabel: this.$t('text.password'),
+      usernamePlaceholder: this.$t('text.usernamePlaceholder'),
+      emailPlaceholder: this.$t('text.emailPlaceholder'),
+      passwordPlaceholder: this.$t('text.passwordPlaceholder'),
+      loginButton: this.$t('button.login'),
+      signUpButton: this.$t('button.signUp'),
+      loginP: this.$t('text.loginParag'),
+      signUpP: this.$t('text.signUpParag'),
       user: {
         username: '',
-        email: 'gurkan@gmail.com',
-        password: '123456'
+        email: '',
+        password: ''
       },
       isUser: true
     }
@@ -104,16 +117,22 @@ export default {
       return this.isUser ? this.titleLogin : this.titleSignUp
     },
     checkForm() {
-      if (this.user.email.length > 0 && this.user.password.length > 0) {
-        return false
-      } else if (
-        this.user.email.length > 0 &&
-        this.user.password.length > 0 &&
-        this.user.username.length > 0
-      ) {
-        return false
+      if (this.isUser) {
+        if (this.user.email.length > 0 && this.user.password.length > 0) {
+          return false
+        } else {
+          return true
+        }
       } else {
-        return true
+        if (
+          this.user.email.length > 0 &&
+          this.user.password.length > 0 &&
+          this.user.username.length > 0
+        ) {
+          return false
+        } else {
+          return true
+        }
       }
     }
   },
@@ -125,7 +144,7 @@ export default {
 
   <style scoped>
 #login {
-  height: 100vh;
+  height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;
