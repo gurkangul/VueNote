@@ -1,7 +1,7 @@
 import { db } from '../../services/firebase'
 import store from '../index'
 import { v4 as uuidv4 } from 'uuid'
-var jwtDecode = require('jwt-decode')
+// var jwtDecode = require('jwt-decode')
 var short = require('short-uuid')
 
 const state = {
@@ -58,7 +58,6 @@ const actions = {
       .delete()
   },
   async saveNote({ commit, state }, payload) {
-    console.log(store, store.getters.getCurrentUser.uid)
     var grpId = short.generate()
     var noteRes = {
       id: uuidv4(),
@@ -79,9 +78,6 @@ const actions = {
       .set(noteRes)
   },
   async getNotes({ commit, dispatch }) {
-    let token = localStorage.getItem('token')
-    var decoded = jwtDecode(token)
-    console.log(decoded.user_id)
     return await db.app
       .firestore()
       .collection('notes')
@@ -116,8 +112,6 @@ const actions = {
       })
   },
   getGroupNotes({ state, commit }) {
-    console.log(store.getters.getCurrentUser, state)
-
     var grps = store.getters.getCurrentUser.groups
     var grpNote = state.noteList
       .map(val => {
@@ -138,7 +132,6 @@ const actions = {
         }
       })
       .filter(item => item != undefined)
-    console.log(userNote)
     commit('GET_NOTES_FAKE', userNote)
   }
 }

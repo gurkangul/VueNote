@@ -8,7 +8,8 @@ const state = {
     uid: '',
     username: '',
     createAt: '',
-    groups: []
+    groups: [],
+    lang: ''
   },
   isLogged: false,
   token: ''
@@ -19,7 +20,7 @@ const getters = {
     return state.user
   },
   isUserLogged(state) {
-    return state.token !== ''
+    return state.isLogged
   }
 }
 
@@ -40,17 +41,24 @@ const mutations = {
 
 const actions = {
   initAuth({ commit, dispatch }) {
-    let token = localStorage.getItem('token')
-    if (token) {
-      commit('SET_TOKEN', token)
-      var decoded = jwtDecode(token)
-      dispatch('getUserFromDb', decoded.user_id)
+    try {
+      let token = localStorage.getItem('token')
+      if (token) {
+        commit('SET_TOKEN', token)
+        commit('USER_AUTH', true)
+        var decoded = jwtDecode(token)
+        dispatch('getUserFromDb', decoded.user_id)
 
-      dispatch('checkTokenExp', token)
-      router.push('/')
-    } else {
-      router.push('/login').catch(() => {})
-      return false
+        dispatch('checkTokenExp', token)
+
+        router.push('/')
+      } else {
+        commit('USER_AUTH', false)
+        router.push('/login').catch(() => {})
+        return false
+      }
+    } catch (error) {
+      console.log(error)
     }
   },
   async setUser({ commit }, payload) {
@@ -64,7 +72,8 @@ const actions = {
           uid: res.user.uid,
           username: payload.username,
           createAt: new Date().getTime(),
-          groups: []
+          groups: [],
+          lang: window.navigator.language
         }
         await db.app
           .firestore()
@@ -91,6 +100,8 @@ const actions = {
 
             let user = { email: res.user.email, uid: res.user.uid }
             commit('SET_TOKEN', token)
+            commit('USER_AUTH', true)
+
             dispatch('getUserFromDb', user.uid)
           })
           .then(() => {
@@ -101,18 +112,24 @@ const actions = {
   signOut({ commit }) {
     db.app.auth().signOut()
     commit('CLEAR_TOKEN')
+    commit('USER_AUTH', false)
     localStorage.removeItem('token')
     router.replace('/login')
   },
-  async getUserFromDb({ commit }, payload) {
-    var userDb = await db.app
-      .firestore()
-      .collection('users')
-      .doc(payload)
-      .get()
+  async getUserFromDb({ commit, state }, payload) {
+    try {
+      var userDb = await db.app
+        .firestore()
+        .collection('users')
+        .doc(payload)
+        .get()
 
-    console.log(userDb.data(), '33333333333')
-    commit('SET_USER', userDb.data())
+      console.log(userDb.data(), '33333333333')
+      commit('SET_USER', userDb.data())
+      localStorage.setItem('lang', state.user.lang)
+    } catch (error) {
+      console.log(error)
+    }
   },
   setTokenExp({ dispatch }, exp) {
     setTimeout(() => {
@@ -127,6 +144,19 @@ const actions = {
     if (currentDate > expTime) {
       dispatch('signOut')
     }
+  },
+  async changeUserLang({ state, dispatch }, payload) {
+    localStorage.setItem('lang', payload.code)
+    await db.app
+      .firestore()
+      .collection('users')
+      .doc(state.user.uid)
+      .update({
+        lang: payload.code
+      })
+      .then(() => {
+        dispatch('getUserFromDb', state.user.uid)
+      })
   }
 }
 

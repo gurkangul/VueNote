@@ -21,8 +21,8 @@ function loadLocaleMessages() {
 }
 
 const i18n = new VueI18n({
-  locale: 'tr-TR',
-  fallbackLocale: 'en-Us',
+  locale: localStorage.getItem('lang'),
+  fallbackLocale: 'tr-TR',
   messages: loadLocaleMessages(),
   silentTranslationWarn: true
 })
